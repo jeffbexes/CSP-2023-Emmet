@@ -1,0 +1,74 @@
+import turtle as trtl
+import random as rand
+#-----setup-----
+apple_image = "apple.gif" # Store the file name of your shape
+wn = trtl.Screen()
+wn.setup(width=1.0, height=1.0)
+wn.addshape(apple_image) # Make the screen aware of the new file
+wn.bgpic("background.gif")
+apple = trtl.Turtle()
+apple2=trtl.Turtle()
+apple3=trtl.Turtle()
+apple4=trtl.Turtle()
+apple5=trtl.Turtle()
+drawer=trtl.Turtle()
+let_list=["a","s","d","f","g","h","j","k","l"]
+turt_list=[]
+turt_list.append(apple)
+turt_list.append(apple2)
+turt_list.append(apple3)
+turt_list.append(apple4)
+turt_list.append(apple5)
+#-----functions-----
+# given a turtle, set that turtle to be shaped by the image file
+def apple_pos():
+  apple2.penup()
+  apple3.penup()
+  apple4.penup()
+  apple5.penup()
+  apple2.shape(apple_image)
+  apple3.shape(apple_image)
+  apple4.shape(apple_image)
+  apple5.shape(apple_image)  
+  for step in range(5):
+    randy=rand.randint(-200,200)
+    randx=rand.randint(-300,300)
+  apple2.goto(randx,randy)
+  apple3.goto(randx,randy)
+  apple4.goto(randx,randy)
+  apple5.goto(randx,randy)
+  return()
+def draw_apple(active_apple):
+  active_apple.shape(apple_image)
+  drawer.penup()
+  drawer.goto(0,100)
+  drawer.color("white")
+  for step in range(5):
+    drawer.write(popped, font=("arial",54,"bold"))
+  wn.update()
+def fall():
+  ycor=apple.ycor()
+  xcor=apple.xcor()
+  apple.penup()
+  apple.goto(xcor,ycor-200)
+  apple2.goto(xcor,ycor-200)
+  apple3.goto(xcor,ycor-200)
+  apple4.goto(xcor,ycor-200)
+  apple5.goto(xcor,ycor-200)
+  drawer.clear()
+  apple.hideturtle()
+  apple2.hideturtle()
+  apple3.hideturtle()
+  apple4.hideturtle()
+  apple5.hideturtle()
+  drawer.hideturtle()
+#-----function calls-----
+popped=let_list.pop(rand.randint(0,8))
+print(popped)
+apple_pos()
+draw_apple(apple)
+wn.onkeypress(fall, popped)
+wn.listen()
+wn.onkeypress(popped)
+wn.listen
+wn.mainloop()
