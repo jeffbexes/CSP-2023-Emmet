@@ -1,0 +1,82 @@
+#import statements
+import turtle as trtl
+import random as rand
+
+#game setup
+#initiate turtles
+barrier=trtl.Turtle()
+barrier.goto(0,100)
+bullet=trtl.Turtle()
+ship=trtl.Turtle()
+counter=trtl.Turtle()
+
+wn=trtl.Screen()
+
+#counter setup
+counter.hideturtle()
+counter.penup()
+counter.goto(0,150)
+#timer
+timer = 120
+counter_interval=1000
+timer_up=False
+
+#score
+score=0
+
+#lists
+bullet_fired=[]
+barrier_shot=[]
+
+#font setup
+font_setup=("Comic Sans", 20, "bold")
+#ship setup
+def turn_left():
+    turn_left=ship.left(5)
+def turn_right():
+    turn_right=ship.right(5)
+ship.shape("classic")
+ship.color("blue")
+wn.onkeypress(turn_left,"a")
+wn.onkeypress(turn_right,"d")
+wn.listen()
+ship_alive=True
+while ship_alive:
+    if (abs(ship.pos() - barrier.pos())>10):
+        ship_alive=False
+
+#funcitons
+def shoot():
+    bullet_fired.append(bullet)
+    bullet.color("#ff0000")
+    bullet.shape("circle")
+    while ship_alive:
+        b_angle=ship.setheading()
+    bullet.setheading(b_angle)
+    bullet.remove()
+
+def countdown():
+    global timer, timer_up
+    counter.clear()
+    if timer<=0:
+        counter.write("timer ",font=font_setup)
+        timer_up=True
+        counter.hideturtle()
+    else:
+        counter.write("timer: " + str(timer), font=font_setup)
+        timer-=1
+        counter.getscreen().ontimer(countdown, counter_interval)a
+
+
+
+#running game
+'''if (abs(bullet.pos() - barrier.pos())>30):
+    score+1
+    bullet.remove()'''
+
+#events
+wn.ontimer(countdown, counter_interval)
+wn.bgcolor("white")
+wn.mainloop()
+
+
