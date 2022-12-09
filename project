@@ -44,16 +44,71 @@ ship_alive=True
 while ship_alive:
     if (abs(ship.pos() - barrier.pos())>10):
         ship_alive=False
+#import statements
+import turtle as trtl
+import random as rand
+import time
+#game setup
+#initiate turtles
+barrier=trtl.Turtle()
 
+ship=trtl.Turtle()
+counter=trtl.Turtle()
+
+wn=trtl.Screen()
+
+#counter setup
+counter.hideturtle()
+counter.penup()
+counter.goto(450,350)
+#timer
+timer = 30
+counter_interval=1000
+timer_up=False
+
+#score
+score=0
+
+#lists
+bullet_fired=[]
+barrier_shot=[]
+
+#font setup
+font_setup=("Comic Sans", 20, "bold")
+#ship setup
+def turn_left():
+    turn_left=ship.left(2)
+def turn_right():
+    turn_right=ship.right(2)
+ship.shape("classic")
+ship.color("blue")
+wn.onkeypress(turn_left,"a")
+wn.onkeypress(turn_right,"d")
+wn.listen()
+ship_alive=True
+
+    
 #funcitons
 def shoot():
-    bullet_fired.append(bullet)
-    bullet.color("#ff0000")
+    bullet=trtl.Turtle()
     bullet.shape("circle")
-    while ship_alive:
-        b_angle=ship.setheading()
+    bullet.turtlesize(1-0.7)
+    bullet.speed(0)
+    bullet.color("#ff0000")
+    bullet_fired.append(bullet)
+    fire = bullet_fired.pop(0)
+    b_angle=ship.heading()
     bullet.setheading(b_angle)
-    bullet.remove()
+    bullet.forward(300)
+    bullet.hideturtle()
+    time.sleep(0.5)
+    bullet.clear()
+    if (abs(bullet.pos() - barrier.pos())>30):
+        score+1
+def death():
+    while ship_alive:
+        if (abs(ship.pos() - barrier.pos())>10):
+            ship_alive=False
 
 def countdown():
     global timer, timer_up
@@ -65,43 +120,31 @@ def countdown():
     else:
         counter.write("timer: " + str(timer), font=font_setup)
         timer-=1
-        counter.getscreen().ontimer(countdown, counter_interval)a
+        counter.getscreen().ontimer(countdown, counter_interval)
+
+def bar_g():
+    for step in range(100):
+        barrier.penup()
+        random_angles=rand.randint(1,360)
+        rand_x=rand.randint(-200,200)
+        rand_y=rand.randint(-300,300)
+        barrier.append
+        for step in range (100):
+            barrier.penup()
+            barrier.setheading(random_angles)
+            barrier.goto(rand_x,rand_y)
+            
 
 
 
-#running game
-'''if (abs(bullet.pos() - barrier.pos())>30):
-    score+1
-    bullet.remove()'''
 
 #events
 wn.ontimer(countdown, counter_interval)
+wn.onkey(shoot,"w")
+time.sleep(0.2)
+bar_g()
+
+
+print (score)
 wn.bgcolor("white")
 wn.mainloop()
-
-
-'''#drawing the zombozos
-for step in range(zombozo):
-    trtl.penup()
-    for i in range (zombozo):
-        random_angles=random.randint(1,360)
-        random_distances=random.randrange(1,5)
-    trtl.pencolor("green")
-    trtl.fillcolor("green")
-    trtl.begin_fill()
-    for step in range (zombozo):
-        trtl.penup()
-        trtl.setheading(random_angles)
-        trtl.forward(random_distances)
-        trtl.pendown()
-    if zombozo<=9:
-     trtl.circle(radius)
-    elif zombozo >= 10:
-     trtl.circle(radius)
-    elif zombozo<=11:
-        trtl.circle(1)
-    trtl.penup()
-    trtl.goto(0,0)
-    trtl.pendown()
-    trtl.end_fill()'''
-
