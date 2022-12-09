@@ -1,52 +1,6 @@
 #import statements
 import turtle as trtl
 import random as rand
-
-#game setup
-#initiate turtles
-barrier=trtl.Turtle()
-barrier.goto(0,100)
-bullet=trtl.Turtle()
-ship=trtl.Turtle()
-counter=trtl.Turtle()
-
-wn=trtl.Screen()
-
-#counter setup
-counter.hideturtle()
-counter.penup()
-counter.goto(0,150)
-#timer
-timer = 120
-counter_interval=1000
-timer_up=False
-
-#score
-score=0
-
-#lists
-bullet_fired=[]
-barrier_shot=[]
-
-#font setup
-font_setup=("Comic Sans", 20, "bold")
-#ship setup
-def turn_left():
-    turn_left=ship.left(5)
-def turn_right():
-    turn_right=ship.right(5)
-ship.shape("classic")
-ship.color("blue")
-wn.onkeypress(turn_left,"a")
-wn.onkeypress(turn_right,"d")
-wn.listen()
-ship_alive=True
-while ship_alive:
-    if (abs(ship.pos() - barrier.pos())>10):
-        ship_alive=False
-#import statements
-import turtle as trtl
-import random as rand
 import time
 #game setup
 #initiate turtles
